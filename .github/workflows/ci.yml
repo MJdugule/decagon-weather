@@ -15,11 +15,6 @@
      runs-on: ubuntu-latest
      steps:
        - uses: actions/checkout@v3
-       - name: Setup Flutter
-         uses: subosito/flutter-action@v2
-         with:
-           channel: ${{ env.FLUTTER_CHANNEL }}
-           flutter-version: ${{ env.FLUTTER_VERSION }}
        - name: Install dependencies
          run: flutter pub get
        - name: Running the formatter
