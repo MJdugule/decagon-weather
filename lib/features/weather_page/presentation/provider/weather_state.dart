@@ -1,3 +1,4 @@
+import 'package:decagon_weather/features/weather_page/domain/entities/five_days_entities.dart';
 import 'package:decagon_weather/features/weather_page/domain/entities/weather_entries.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,14 @@ class Loaded extends WeatherState {
 
   @override
   List<Object> get props => [weatherEntities];
+}
+class LoadedFiveDay extends WeatherState {
+  final FiveDaysEntities fiveDayWeatherEntities;
+
+  LoadedFiveDay({required this.fiveDayWeatherEntities});
+
+  @override
+  List<Object> get props => [fiveDayWeatherEntities];
 }
 
 class Error extends WeatherState {

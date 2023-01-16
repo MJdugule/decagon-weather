@@ -2,29 +2,25 @@ import 'package:dartz/dartz.dart';
 import 'package:decagon_weather/core/error/failures.dart';
 import 'package:decagon_weather/core/usecase/usecase.dart';
 import 'package:decagon_weather/features/weather_page/domain/entities/five_days_entities.dart';
-import 'package:decagon_weather/features/weather_page/domain/entities/weather_entries.dart';
-import 'package:decagon_weather/features/weather_page/domain/usecases/get_current_weather.dart';
 import 'package:decagon_weather/features/weather_page/domain/usecases/get_five_days_usecase.dart';
 import 'package:decagon_weather/features/weather_page/domain/usecases/request_device_location_usecase.dart';
 import 'package:decagon_weather/features/weather_page/presentation/provider/weather_event.dart';
 import 'package:decagon_weather/features/weather_page/presentation/provider/weather_state.dart';
 import 'package:flutter/material.dart';
 
-class WeatherNotifier extends ChangeNotifier {
-  WeatherNotifier({
+class FiveDayWeatherNotifier extends ChangeNotifier {
+  FiveDayWeatherNotifier({
     required this.requestDeviceLocationUsecase,
-    required this.currentWeather,
     required this.fiveDaysWeatherUsecase,
   });
 
   final RequestDeviceLocationUsecase requestDeviceLocationUsecase;
-  final CurrentWeatherUsecase currentWeather;
+
   final FiveDaysWeatherUsecase fiveDaysWeatherUsecase;
 
   bool hasPermission = false;
   bool location = false;
   WeatherState state = Empty();
-  WeatherEntities? entities;
   FiveDaysEntities? fiveDaysEntities;
   Future<void> requestDeviceLocation(BuildContext context) async {
     final response = await requestDeviceLocationUsecase(
@@ -37,13 +33,6 @@ class WeatherNotifier extends ChangeNotifier {
       },
       (r) async {
         state = Loading();
-        final failureOrWeather = await currentWeather(
-            Params(lat: r.latitude.toString(), lon: r.longitude.toString()));
-        failureOrWeather.fold((l) {}, (r) {
-          entities = r;
-          Loaded(weatherEntities: entities!);
-          state = Loaded(weatherEntities: entities!);
-        });
 
         final fiveFailureOrWeather = await fiveDaysWeatherUsecase(
             Params(lat: r.latitude.toString(), lon: r.longitude.toString()));
@@ -60,12 +49,12 @@ class WeatherNotifier extends ChangeNotifier {
   }
 
   Stream eitherLoadedOrErrorState(
-    Either<Failure, WeatherEntities> failureOrWeather,
+    Either<Failure, FiveDaysEntities> failureOrWeather,
   ) async* {
     yield failureOrWeather.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
       (weather) {
-        entities = weather;
+        fiveDaysEntities = weather;
       },
     );
     notifyListeners();
