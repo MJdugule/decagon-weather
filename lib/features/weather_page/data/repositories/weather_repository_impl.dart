@@ -28,6 +28,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   Future<Either<Failure, Position>> requestDeviceLocation() async {
     try {
       final response = await weatherLocalDatasource.requestDeviceLocation();
+
       return Right(response);
     } catch (e) {
       return Left(

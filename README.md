@@ -3,7 +3,7 @@
 ## Description
 A weather application to display the current weather at the user's location
 ## Repo structure
-This repository makes use of [stacked](https://pub.dev/packages/stacked) and it's architecture, which is an MVVM pattern. 
+This repository makes use of an MVVM pattern. 
 
 # Running the Flutter app
 
@@ -16,40 +16,37 @@ This repository makes use of [stacked](https://pub.dev/packages/stacked) and it'
 
 The app is generally split up into three layers:
 
-1. View layer - Flutter widgets
-2. ViewModels
-3. Services
+1. Presentation - Flutter widgets
+2. Data
+3. Domain
 
-View: Shows the UI to the user. Single widgets also qualify as views (for consistency in terminology) a view, in this case, is not a "Page" it's just a UI representation.
+Presentation: Shows the UI to the user. Single widgets also qualify as views (for consistency in terminology) a view, in this case, is not a "Page" it's just a UI representation.
 
-ViewModel: Manages the state of the View, business logic, and any other logic as required from user interaction. It does this by making use of the services
+Domain: Manages the state of the View, business logic, and any other logic as required from user interaction. It does this by making use of the services
 
-Services: A wrapper of a single functionality/feature set. This is commonly used to wrap things like showing a dialog, wrapping database functionality, integrating an API, etc.
+Data: A wrapper of a single functionality/feature set. This is commonly used to wrap things like showing a dialog, wrapping database functionality, integrating an API, etc.
 
 Before continuing I'd recommend reading the official docs on state management as the concepts and packages used are very similar to the ones used in this app. https://flutter.dev/docs/development/data-and-backend/state-mgmt/intro
 
-### View layer
+## Style Guide
+ ### Button Guidelines
+  According to our design style guide, We have two types of customized button:
+  - Elevated Button - This is the defualt button that we generally use, by calling `AppButton()`. 
+  - Outlined Button - This is another type of button that is used when you need just the outlined border, it is called by `AppButton.outlined`.
 
-The View layer is built using Flutter widgets. Ensure that all widgets are stateless and that all state is managed by the view models. As described by stacked architecture, the UI layer should only be concerned with displaying data and handling user input. The UI layer should not be concerned with how the data is fetched or how the user input is handled.
+  Each of these button can be easily custumize by already added properties.
 
-Views are located in the `lib/ui/views` folder. Each view is split up into two files, a view and a view model. The view model is responsible for managing the state of the view and the view is responsible for displaying the state.
+### Color 
+You can go throught the `colors.dart` file to see the kind of color you need.
 
-To get a grasp of the lifecycle of a widget I'd recommend reading https://programmingpot.com/flutter/flutter-stateful-widget-lifecycle/ and the official documentation https://flutter.dev/docs/development/ui/widgets-intro
+### Text Style
+According to the text style, it is called by `kHeading1TextStyle` it can be used according to the style you want to implement.
 
-### ViewModels
-
-ViewModels are responsible for managing the state of a view. They are located in the `lib/ui/views/..viewmodel.dart` folder. Each view model is responsible for managing the state of a single view.
-
-ViewModels are built using the stacked architecture. Stacked is a state management architecture that is built on top of the provider package. It is a very simple architecture that is easy to understand and use. It is also very flexible and can be used with any other state management architecture.
-
-#### Services
-
-Services are a wrapper of a single functionality/feature set, third-party packages. This is commonly used to wrap things like showing a dialog, wrapping database functionality, integrating an API, etc. Services are located in the `lib/core/services` folder. Services are injected into the view models using the locator pattern.
-
-
+You can go throught the `text_styles.dart` file to see the kind of text styles you need.
 
 ## Commits Guidlines
  All PRs must be according to the recommended naming convention. (https://www.conventionalcommits.org/en/v1.0.0/)
 
-
+## Appetitize link
+https://appetize.io/app/jtuotdpxb2daeunwpysgrktxfy?device=pixel4&osVersion=11.0&scale=75
 
