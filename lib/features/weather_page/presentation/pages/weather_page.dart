@@ -9,6 +9,7 @@ import 'package:decagon_weather/features/weather_page/presentation/widgets/image
 import 'package:decagon_weather/features/weather_page/presentation/widgets/min_main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -26,7 +27,6 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       body: Consumer<WeatherNotifier>(builder: (context, value, child) {
         value.requestDeviceLocation(context);
-
         if (value.state is Loaded) {
           return Column(
             children: [
