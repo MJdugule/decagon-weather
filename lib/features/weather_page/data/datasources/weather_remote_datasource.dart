@@ -24,7 +24,8 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
 
   Future<WeatherModel> _getWeatherFromUrl(String url) async {
     //print(url);
-    final response = await client.get(
+    try {
+       final response = await client.get(
       Uri.parse(url),
       
     );
@@ -36,5 +37,9 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       
       throw ServerException();
     }
+    } catch (e) {
+      throw ServerException();
+    }
+   
   }
 }
