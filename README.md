@@ -29,19 +29,11 @@ Data: A wrapper of a single functionality/feature set. This is commonly used to 
 Before continuing I'd recommend reading the official docs on state management as the concepts and packages used are very similar to the ones used in this app. https://flutter.dev/docs/development/data-and-backend/state-mgmt/intro
 
 ## Style Guide
- ### Button Guidelines
-  According to our design style guide, We have two types of customized button:
-  - Elevated Button - This is the defualt button that we generally use, by calling `AppButton()`. 
-  - Outlined Button - This is another type of button that is used when you need just the outlined border, it is called by `AppButton.outlined`.
-
-  Each of these button can be easily custumize by already added properties.
 
 ### Color 
 You can go throught the `colors.dart` file to see the kind of color you need.
 
 ### Text Style
-According to the text style, it is called by `kHeading1TextStyle` it can be used according to the style you want to implement.
-
 You can go throught the `text_styles.dart` file to see the kind of text styles you need.
 
 ## Commits Guidlines
