@@ -17,16 +17,21 @@ class DeviceLocationImpl implements DeviceLocation {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.always ||
           permission == LocationPermission.whileInUse) {
+          
         return true;
       }
+     
       return Future.error('Location permissions are denied');
     } else {
+      
       return true;
     }
   }
 
   @override
   Future<Position> getCurrentLocation() async {
-    return Geolocator.getCurrentPosition();
+    await requestPermission();
+    var position = Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return position;
   }
 }

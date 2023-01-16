@@ -14,6 +14,8 @@ class Providers extends StatelessWidget {
         ChangeNotifierProvider<WeatherNotifier>(
           create: (_) => di<WeatherNotifier>(),
         ),
+
+       // ProxyProvider<WeatherNotifier, WeatherState>(update: (context, value, previous) => WeatherState(),)
       ],
       child: child,
     );
