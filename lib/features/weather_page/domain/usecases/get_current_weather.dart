@@ -17,6 +17,5 @@ class CurrentWeatherUsecase extends UseCase<WeatherEntities, Params> {
   Future<Either<Failure, WeatherEntities>> call(Params params) async {
     return weatherRepository.getCurrentWeather(lat: params.lat, lon: params.lon);
   }
-
 }
 

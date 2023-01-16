@@ -26,7 +26,6 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       body: Consumer<WeatherNotifier>(builder: (context, value, child) {
         value.requestDeviceLocation(context);
-
         if (value.state is Loaded) {
           return Column(
             children: [
