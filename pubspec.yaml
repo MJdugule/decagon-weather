@@ -29,7 +29,10 @@ dependencies:
   dartz: ^0.10.1
   provider: ^6.0.5
   get_it: ^7.2.0
-  data_connection_checker: ^0.3.4
+  internet_connection_checker: ^1.0.0+1
+  http: ^0.13.5
+  package_info_plus: ^3.0.2
+  flutter_bloc: ^8.1.1
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +43,7 @@ dev_dependencies:
 
 flutter:  
   uses-material-design: true
-  # assets:
-  #   - assets/images/
-  #   - assets/icons/
+  assets:
+    - assets/images/
+    - assets/icons/
 
