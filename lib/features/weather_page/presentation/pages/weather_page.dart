@@ -2,13 +2,13 @@ import 'package:decagon_weather/core/constant/app_asset.dart';
 import 'package:decagon_weather/core/constant/app_divider.dart';
 import 'package:decagon_weather/core/constant/app_textstyle.dart';
 import 'package:decagon_weather/features/weather_page/domain/entities/weather_entries.dart';
+import 'package:decagon_weather/features/weather_page/presentation/provider/five_weather_notifier.dart';
 import 'package:decagon_weather/features/weather_page/presentation/provider/weather_notifier.dart';
 import 'package:decagon_weather/features/weather_page/presentation/provider/weather_state.dart';
 import 'package:decagon_weather/features/weather_page/presentation/widgets/image_display.dart';
 import 'package:decagon_weather/features/weather_page/presentation/widgets/min_main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -22,22 +22,11 @@ class _WeatherPageState extends State<WeatherPage> {
   WeatherEntities? weatherEntities;
 
   @override
-  void initState() {
-    delet();
-    super.initState();
-  }
-
-  delet() async {
-    await SharedPreferences.getInstance().then((value) {
-      value.clear();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<WeatherNotifier>(builder: (context, value, child) {
         value.requestDeviceLocation(context);
+
         if (value.state is Loaded) {
           return Column(
             children: [
@@ -48,17 +37,19 @@ class _WeatherPageState extends State<WeatherPage> {
                   entities: value.entities!,
                   weather: value.entities!.main.temp.toString()),
               spacedDivider,
+              Consumer<FiveDayWeatherNotifier>(
+                  builder: (context, fivevalue, child) {
+                fivevalue.requestDeviceLocation(context);
+                //print(fivevalue.fiveDaysEntities!.list.first.weather!.first.id);
+                return const Text("data");
+              })
             ],
           );
         } else if (value.state is Loading) {
           return const Center(child: CircularProgressIndicator());
-        }
+        } else if (value.state is LoadedFiveDay) {}
         //print(value.entities);
-        if (value.entities != null) {
-          return ImageDisplay(
-              weatherEntities: value.entities!,
-              weather: value.entities!.weather.first.main);
-        }
+        if (value.fiveDaysEntities != null) {}
 
         return Column(
           children: [

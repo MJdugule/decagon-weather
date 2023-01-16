@@ -10,8 +10,10 @@ import 'package:decagon_weather/features/weather_page/data/repositories/weather_
 import 'package:decagon_weather/features/weather_page/domain/repostories/weather_repository.dart'
     as i7;
 import 'package:decagon_weather/features/weather_page/domain/usecases/get_current_weather.dart' as i16;
+import 'package:decagon_weather/features/weather_page/domain/usecases/get_five_days_usecase.dart' as i18;
 import 'package:decagon_weather/features/weather_page/domain/usecases/request_device_location_usecase.dart'
     as i5;
+import 'package:decagon_weather/features/weather_page/presentation/provider/five_weather_notifier.dart' as i17;
 import 'package:decagon_weather/features/weather_page/presentation/provider/weather_notifier.dart'
     as i4;
 import 'package:get_it/get_it.dart';
@@ -44,11 +46,18 @@ Future<i1.GetIt> $initGetIt(
 
   final registerModule = _$RegisterModule();
   gh.lazySingleton<i4.WeatherNotifier>(() => i4.WeatherNotifier(
+    fiveDaysWeatherUsecase: get<i18.FiveDaysWeatherUsecase>(),
     currentWeather: get<i16.CurrentWeatherUsecase>(),
         requestDeviceLocationUsecase: get<i5.RequestDeviceLocationUsecase>(),
         
       ));
+      gh.lazySingleton<i17.FiveDayWeatherNotifier>(() => i17.FiveDayWeatherNotifier(
+    fiveDaysWeatherUsecase: get<i18.FiveDaysWeatherUsecase>(),
+        requestDeviceLocationUsecase: get<i5.RequestDeviceLocationUsecase>(),
+        
+      ));
 
+  gh.lazySingleton<i18.FiveDaysWeatherUsecase>(() => i18.FiveDaysWeatherUsecase(weatherRepository: get<i7.WeatherRepository>()));
   gh.lazySingleton<i16.CurrentWeatherUsecase>(() => i16.CurrentWeatherUsecase(weatherRepository: get<i7.WeatherRepository>()));
   gh.lazySingleton<i5.RequestDeviceLocationUsecase>(() =>
       i5.RequestDeviceLocationUsecase(

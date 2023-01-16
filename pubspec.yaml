@@ -19,24 +19,29 @@ dependencies:
   #location
   geolocator: ^9.0.2
   geocoding: ^2.0.5
-
-  intl: ^0.18.0
-
-  #stored data
-  shared_preferences: ^2.0.15
-  injectable: ^2.1.0
-  equatable: ^2.0.5
-  dartz: ^0.10.1
-  provider: ^6.0.5
+  #Service locator
   get_it: ^7.2.0
-  internet_connection_checker: ^1.0.0+1
+  #Date Formatting
+  intl: ^0.18.0
+  #Remote API
   http: ^0.13.5
-  package_info_plus: ^3.0.2
-  flutter_bloc: ^8.1.1
+  internet_connection_checker: ^1.0.0+1
+  #Local data
+  shared_preferences: ^2.0.15
+  #Value equality
+  equatable: ^2.0.5
+  #Functional programming
+  injectable: ^2.1.0
+  dartz: ^0.10.1
+  #State Management
+  provider: ^6.0.5
+  
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.3.2
 
   flutter_lints: ^2.0.0
 
