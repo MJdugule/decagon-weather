@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget spacedDivider = Column(
-  children: const [
+Widget spacedDivider = const Column(
+  children: [
     
     Divider(
       color: Colors.white,
